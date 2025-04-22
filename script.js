@@ -72,12 +72,13 @@ class Location
     }
 }
 
-let chicago = new Location("chicago", 41.85003, -87.65005);
-Promise.all([chicago.sunRiseToday, chicago.sunSetToday, chicago.sunRiseTomorrow, chicago.sunSetTomorrow])
-    .then((values) => {
-        for(let i = 0; i < values.length; i++)
-        {
-            console.log(values[i]);
-        }
-    });
-
+let chicago = new Location("Chicago", 41.85003, -87.65005);
+let cypress = new Location("Cypress", 33.81696, -118.03729);
+let burlington = new Location("Burlington", 36.09569, -79.4378);
+let longview = new Location("Longview", 32.5007, -94.74049);
+let phenixCity = new Location("Phenix City", 32.47098, -85.00077);
+let minnetonka = new Location("Minnetonka", 44.9133, -93.50329);
+let bartlett = new Location("Bartlett", 35.20453, -89.87398);
+let shawnee = new Location("Shawnee", 39.04167, -94.72024);
+let buenaPark = new Location("Buena Park", 33.86751, -117.99812);
+let youngstown = new Location("Youngstown", 41.09978, -80.64952);
