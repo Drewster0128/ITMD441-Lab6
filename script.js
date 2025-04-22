@@ -1,10 +1,7 @@
 //list of locations with there latitude and longitude coordinates
 class Location
 {
-    #sunRiseToday;
-    #sunSetToday;
-    #sunRiseTomorrow;
-    #sunSetTomorrow;
+    #sunData;
     #name;
     #latitude;
     #longitude;
@@ -14,60 +11,160 @@ class Location
         this.#name = name;
         this.#latitude = latitude;
         this.#longitude = longitude;
+        this.#sunData = [new SunData("today", latitude, longitude), new SunData("tomorrow", latitude, longitude)];
+    }
+
+    get todaysSunData()
+    {
+        return this.#sunData[0];
+    }
+
+    get tomorrowsSunData()
+    {
+        return this.#sunData[1];
+    }
+
+    get latitude()
+    {
+        return this.#latitude;
+    }
+
+    get longitude()
+    {
+        return this.#longitude;
+    }
+
+    get name()
+    {
+        return this.#name;
+    }
+}
+
+class SunData
+{
+    #date;
+    #dawn;
+    #dayLength;
+    #dusk;
+
+    #latitude;
+    #longitude;
+
+    #solorNoon;
+    #sunrise;
+    #sunset;
+   
+    #timezone;
+
+    constructor(date, latitude, longitude)
+    {
+        this.#date = date;
+        this.#latitude = latitude;
+        this.#longitude = longitude;
     }
 
     async #fetchSunData()
     {
-        let response = await fetch(`https://api.sunrisesunset.io/json?lat=${this.#latitude}&lng=${this.#longitude}&date_start=today&date_end=tomorrow`);
+        let response = await fetch(`https://api.sunrisesunset.io/json?lat=${this.#latitude}&lng=${this.#longitude}&date=${this.#date}`);
         response = await response.json();
+            
+        this.#date = response.results["date"];
+        this.#dawn = response.results["dawn"];
+        this.#dayLength = response.results["day_length"];
+        this.#dusk = response.results["dusk"];
+        
+        this.#solorNoon = response.results["solar_noon"];
+        this.#sunrise = response.results["sunrise"];
+        this.#sunset = response.results["sunset"];
 
-        this.#sunRiseToday = response.results[0].sunrise;
-        this.#sunSetToday = response.results[0].sunset;
-        this.#sunRiseTomorrow = response.results[1].sunrise;
-        this.#sunSetTomorrow = response.results[1].sunset;
+        this.#timezone = response.results["timezone"];
     }
 
-    get sunRiseToday()
+    get date()
     {
         return (async() => {
-            if(!this.#sunRiseToday)
+            if(!this.#date)
             {
                 await this.#fetchSunData();
             }
-            return this.#sunRiseToday;
+            return this.#date;
         })();
     }
 
-    get sunSetToday()
+    get dawn()
     {
         return (async() => {
-            if(!this.#sunSetToday)
+            if(!this.#dawn)
             {
                 await this.#fetchSunData();
             }
-            return this.#sunSetToday;
+            return this.#dawn;
         })();
     }
 
-    get sunRiseTomorrow()
+    get dayLength()
     {
         return (async() => {
-            if(!this.#sunRiseTomorrow)
+            if(!this.#dayLength)
             {
                 await this.#fetchSunData();
             }
-            return this.#sunRiseTomorrow;
+            return this.#dayLength;
         })();
     }
 
-    get sunSetTomorrow()
+    get dusk()
     {
         return (async() => {
-            if(!this.#sunSetTomorrow)
+            if(!this.#dusk)
             {
                 await this.#fetchSunData();
             }
-            return this.#sunSetTomorrow;
+            return this.#dusk;
+        })();
+    }
+
+    get solorNoon()
+    {
+        return (async() => {
+            if(!this.#solorNoon)
+            {
+                await this.#fetchSunData();
+            }
+            return this.#solorNoon;
+        })();
+    }
+
+    get sunRise()
+    {
+        return (async() => {
+            if(!this.#sunrise)
+            {
+                await this.#fetchSunData();
+            }
+            return this.#sunrise;
+        })();
+    }
+
+    get sunSet()
+    {
+        return (async() => {
+            if(!this.#sunset)
+            {
+                await this.#fetchSunData();
+            }
+            return this.#sunset;
+        })();
+    }
+
+    get timezone()
+    {
+        return (async() => {
+            if(!this.#timezone)
+            {
+                await this.#fetchSunData();
+            }
+            return this.#timezone;
         })();
     }
 }
