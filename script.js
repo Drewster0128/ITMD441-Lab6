@@ -192,8 +192,14 @@ for(let i = 0; i < cities.length; i++)
 {
     Promise.all([cities[i].todaysSunData.sunRise, cities[i].todaysSunData.sunSet])
         .then(values => {
-            document.getElementById(cities[i].id).children[1].innerHTML = `
-            <li class="city__sunrise">${values[0]}</li>
-            <li class="city__sunset">${values[1]}</li>`
+            document.querySelector(`#${cities[i].id} .city__data`).innerHTML = `
+            <li>
+                <img class="sum__img" src="img/sunrise.png"/>
+                <p class="sun__text">${values[0]}</p>
+            </li>
+            <li>
+                <img class="sun__img" src="img/sunset.png"/>
+                <p class="sun__text">${values[1]}</p>
+            </li>`
         });
 }

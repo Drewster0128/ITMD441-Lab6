@@ -1,0 +1,29 @@
+html {
+    font-size: 14px;
+    line-height: 1.2em;
+}
+
+ul {
+    list-style: none;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.city__data {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    width: fit-content;
+    margin: auto;
+}
+
+.city__name {
+    text-align: center;
+}
+
+.sun__text {
+    text-align: center;
+}
