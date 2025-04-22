@@ -5,13 +5,15 @@ class Location
     #name;
     #latitude;
     #longitude;
+    #id;
     
-    constructor(name, latitude, longitude)
+    constructor(name, latitude, longitude, id)
     {
         this.#name = name;
         this.#latitude = latitude;
         this.#longitude = longitude;
         this.#sunData = [new SunData("today", latitude, longitude), new SunData("tomorrow", latitude, longitude)];
+        this.#id = id;
     }
 
     get todaysSunData()
@@ -37,6 +39,11 @@ class Location
     get name()
     {
         return this.#name;
+    }
+
+    get id()
+    {
+        return this.#id;
     }
 }
 
@@ -169,13 +176,24 @@ class SunData
     }
 }
 
-let chicago = new Location("Chicago", 41.85003, -87.65005);
-let cypress = new Location("Cypress", 33.81696, -118.03729);
-let burlington = new Location("Burlington", 36.09569, -79.4378);
-let longview = new Location("Longview", 32.5007, -94.74049);
-let phenixCity = new Location("Phenix City", 32.47098, -85.00077);
-let minnetonka = new Location("Minnetonka", 44.9133, -93.50329);
-let bartlett = new Location("Bartlett", 35.20453, -89.87398);
-let shawnee = new Location("Shawnee", 39.04167, -94.72024);
-let buenaPark = new Location("Buena Park", 33.86751, -117.99812);
-let youngstown = new Location("Youngstown", 41.09978, -80.64952);
+let chicago = new Location("Chicago", 41.85003, -87.65005, "chicago");
+let cypress = new Location("Cypress", 33.81696, -118.03729, "cypress");
+let burlington = new Location("Burlington", 36.09569, -79.4378, "burlington");
+let longview = new Location("Longview", 32.5007, -94.74049, "longview");
+let phenixCity = new Location("Phenix City", 32.47098, -85.00077, "phenx_city");
+let minnetonka = new Location("Minnetonka", 44.9133, -93.50329, "minnetonka");
+let bartlett = new Location("Bartlett", 35.20453, -89.87398, "bartlett");
+let shawnee = new Location("Shawnee", 39.04167, -94.72024, "shawnee");
+let buenaPark = new Location("Buena Park", 33.86751, -117.99812, "buena_park");
+let youngstown = new Location("Youngstown", 41.09978, -80.64952, "youngstown");
+
+cities = new Array(chicago, cypress, burlington, longview, phenixCity, minnetonka, bartlett, shawnee, buenaPark, youngstown);
+for(let i = 0; i < cities.length; i++)
+{
+    Promise.all([cities[i].todaysSunData.sunRise, cities[i].todaysSunData.sunSet])
+        .then(values => {
+            document.getElementById(cities[i].id).children[1].innerHTML = `
+            <li class="city__sunrise">${values[0]}</li>
+            <li class="city__sunset">${values[1]}</li>`
+        });
+}
