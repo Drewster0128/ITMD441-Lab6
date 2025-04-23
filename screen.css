@@ -40,3 +40,9 @@ main {
 .sun__text {
     text-align: center;
 }
+
+.city--selected {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    margin-bottom: 2em;
+}
