@@ -16,7 +16,7 @@ let youngstown = new Location("Youngstown", 41.09978, -80.64952, "youngstown");
 let cities = new Array(chicago, cypress, burlington, longview, phenixCity, minnetonka, bartlett, shawnee, buenaPark, youngstown);
 for(let i = 0; i < cities.length; i++)
 {
-    Promise.all([cities[i].todaysSunData.sunRise, cities[i].todaysSunData.sunSet])
+    Promise.all([cities[i].todaysSunData.sunRise, cities[i].todaysSunData.sunSet, cities[i].todaysSunData.timezone])
         .then(values => {
             document.querySelector(`#${cities[i].id} .city__data`).innerHTML = `
             <li>
@@ -27,6 +27,8 @@ for(let i = 0; i < cities.length; i++)
                 <img class="sun__img" src="img/sunset.png"/>
                 <p class="sun__text">${values[1]}</p>
             </li>`
+
+            document.querySelector(`#${cities[i].id} .city__timezone`).textContent = values[2];
         });
 }
 
