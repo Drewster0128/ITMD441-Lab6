@@ -16,19 +16,31 @@ let youngstown = new Location("Youngstown", 41.09978, -80.64952, "youngstown");
 let cities = new Array(chicago, cypress, burlington, longview, phenixCity, minnetonka, bartlett, shawnee, buenaPark, youngstown);
 for(let i = 0; i < cities.length; i++)
 {
-    Promise.all([cities[i].todaysSunData.sunRise, cities[i].todaysSunData.sunSet, cities[i].todaysSunData.timezone])
+    Promise.all([cities[i].todaysSunData.sunRise, cities[i].todaysSunData.dawn, cities[i].todaysSunData.solorNoon, cities[i].todaysSunData.dusk, cities[i].todaysSunData.sunSet, cities[i].todaysSunData.timezone])
         .then(values => {
             document.querySelector(`#${cities[i].id} .city__data`).innerHTML = `
-            <li>
+            <li class="sun__dawn">
+                <h3>Dawn</h3>
+                <p class="sun__text">${values[1]}</p>
+            </li>
+            <li class="sun__sunrise">
                 <img class="sum__img" src="img/sunrise.png"/>
                 <p class="sun__text">${values[0]}</p>
             </li>
-            <li>
+            <li class="sun__solarnoon">
+                <h3>Solar Noon</h3>
+                <p class="sun__text">${values[2]}</p>
+            </li>
+            <li class="sun__sunset">
                 <img class="sun__img" src="img/sunset.png"/>
-                <p class="sun__text">${values[1]}</p>
+                <p class="sun__text">${values[4]}</p>
+            </li>
+            <li class="sun__dusk">
+                <h3>Dusk</h3>
+                <p class="sun__text">${values[3]}</p>
             </li>`
 
-            document.querySelector(`#${cities[i].id} .city__timezone`).textContent = values[2];
+            document.querySelector(`#${cities[i].id} .city__timezone`).textContent = values[5];
             document.querySelector(`#${cities[i].id} .city__coords`).textContent = `(${cities[i].latitude}, ${cities[i].longitude})`
         });
 }
@@ -54,19 +66,31 @@ function toggleData(checkbox)
         //output todays data
         for(let i = 0; i < cities.length; i++)
         {
-            Promise.all([cities[i].todaysSunData.sunRise, cities[i].todaysSunData.sunSet, cities[i].todaysSunData.timezone])
+            Promise.all([cities[i].todaysSunData.sunRise, cities[i].todaysSunData.dawn, cities[i].todaysSunData.solorNoon, cities[i].todaysSunData.dusk, cities[i].todaysSunData.sunSet, cities[i].todaysSunData.timezone])
                 .then(values => {
                     document.querySelector(`#${cities[i].id} .city__data`).innerHTML = `
-                    <li>
+                    <li class="sun__dawn">
+                        <h3>Dawn</h3>
+                        <p class="sun__text">${values[1]}</p>
+                    </li>
+                    <li class="sun__sunrise">
                         <img class="sum__img" src="img/sunrise.png"/>
                         <p class="sun__text">${values[0]}</p>
                     </li>
-                    <li>
+                    <li class="sun__solarnoon">
+                        <h3>Solar Noon</h3>
+                        <p class="sun__text">${values[2]}</p>
+                    </li>
+                    <li class="sun__sunset">
                         <img class="sun__img" src="img/sunset.png"/>
-                        <p class="sun__text">${values[1]}</p>
+                        <p class="sun__text">${values[4]}</p>
+                    </li>
+                    <li class="sun__dusk">
+                        <h3>Dusk</h3>
+                        <p class="sun__text">${values[3]}</p>
                     </li>`
         
-                    document.querySelector(`#${cities[i].id} .city__timezone`).textContent = values[2];
+                    document.querySelector(`#${cities[i].id} .city__timezone`).textContent = values[5];
                     document.querySelector(`#${cities[i].id} .city__coords`).textContent = `(${cities[i].latitude}, ${cities[i].longitude})`
                 });
         }
@@ -75,22 +99,34 @@ function toggleData(checkbox)
     {
         //output tomorrows data
         for(let i = 0; i < cities.length; i++)
-        {
-            Promise.all([cities[i].tomorrowsSunData.sunRise, cities[i].tomorrowsSunData.sunSet, cities[i].tomorrowsSunData.timezone])
-                .then(values => {
-                    document.querySelector(`#${cities[i].id} .city__data`).innerHTML = `
-                    <li>
-                        <img class="sum__img" src="img/sunrise.png"/>
-                        <p class="sun__text">${values[0]}</p>
-                    </li>
-                    <li>
-                        <img class="sun__img" src="img/sunset.png"/>
-                        <p class="sun__text">${values[1]}</p>
-                    </li>`
-        
-                    document.querySelector(`#${cities[i].id} .city__timezone`).textContent = values[2];
-                    document.querySelector(`#${cities[i].id} .city__coords`).textContent = `(${cities[i].latitude}, ${cities[i].longitude})`
-                });
-        }
+            {
+                Promise.all([cities[i].tomorrowsSunData.sunRise, cities[i].tomorrowsSunData.dawn, cities[i].tomorrowsSunData.solorNoon, cities[i].tomorrowsSunData.dusk, cities[i].tomorrowsSunData.sunSet, cities[i].tomorrowsSunData.timezone])
+                    .then(values => {
+                        document.querySelector(`#${cities[i].id} .city__data`).innerHTML = `
+                        <li class="sun__dawn">
+                            <h3>Dawn</h3>
+                            <p class="sun__text">${values[1]}</p>
+                        </li>
+                        <li class="sun__sunrise">
+                            <img class="sum__img" src="img/sunrise.png"/>
+                            <p class="sun__text">${values[0]}</p>
+                        </li>
+                        <li class="sun__solarnoon">
+                            <h3>Solar Noon</h3>
+                            <p class="sun__text">${values[2]}</p>
+                        </li>
+                        <li class="sun__sunset">
+                            <img class="sun__img" src="img/sunset.png"/>
+                            <p class="sun__text">${values[4]}</p>
+                        </li>
+                        <li class="sun__dusk">
+                            <h3>Dusk</h3>
+                            <p class="sun__text">${values[3]}</p>
+                        </li>`
+            
+                        document.querySelector(`#${cities[i].id} .city__timezone`).textContent = values[5];
+                        document.querySelector(`#${cities[i].id} .city__coords`).textContent = `(${cities[i].latitude}, ${cities[i].longitude})`
+                    });
+            }
     }
 }

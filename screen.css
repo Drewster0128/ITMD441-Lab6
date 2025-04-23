@@ -4,12 +4,15 @@ html {
     line-height: 1.2em;
     color: #FAF9F6;
     background-color: #1C1C1C;
+    margin-left: 1em;
+    margin-right: 1em;
 }
 
 header {
     width: fit-content;
     margin: auto;
     margin-bottom: 1.5em;
+    margin-top: 1.5em;
 }
 
 h1 {
@@ -110,6 +113,10 @@ main {
     width: 0;
 }
 
+.sun__dawn, .sun__solarnoon, .sun__dusk {
+    display: none;
+}
+
 .switch__input:checked + .switch__slider:before {
     left: 72;
     transition: left 0.5s ease-in-out;
@@ -140,4 +147,8 @@ main {
     content: "•";
     margin-right: 0.25em;
     display: inline-block;
+}
+
+.city--selected .sun__dawn, .city--selected .sun__solarnoon, .city--selected .sun__dusk {
+    display: list-item;
 }

@@ -27,11 +27,11 @@ export default class SunData
         response = await response.json();
             
         this.#date = response.results["date"];
-        this.#dawn = response.results["dawn"];
+        this.dawn = response.results["dawn"];
         this.#dayLength = response.results["day_length"];
-        this.#dusk = response.results["dusk"];
+        this.dusk = response.results["dusk"];
         
-        this.#solorNoon = response.results["solar_noon"];
+        this.solorNoon = response.results["solar_noon"];
         this.sunRise = response.results["sunrise"];
         this.sunSet = response.results["sunset"];
 
@@ -68,6 +68,11 @@ export default class SunData
         })();
     }
 
+    set dawn(dawn)
+    {
+        this.#dawn = this.#removeSeconds(dawn);
+    }
+
     get dayLength()
     {
         return (async() => {
@@ -90,6 +95,11 @@ export default class SunData
         })();
     }
 
+    set dusk(dusk)
+    {
+        this.#dusk = this.#removeSeconds(dusk);
+    }
+
     get solorNoon()
     {
         return (async() => {
@@ -99,6 +109,11 @@ export default class SunData
             }
             return this.#solorNoon;
         })();
+    }
+    
+    set solorNoon(solorNoon)
+    {
+        this.#solorNoon = this.#removeSeconds(solorNoon);
     }
 
     get sunRise()
