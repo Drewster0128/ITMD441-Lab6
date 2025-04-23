@@ -11,6 +11,8 @@ let shawnee = new Location("Shawnee", 39.04167, -94.72024, "shawnee");
 let buenaPark = new Location("Buena Park", 33.86751, -117.99812, "buena_park");
 let youngstown = new Location("Youngstown", 41.09978, -80.64952, "youngstown");
 
+
+
 let cities = new Array(chicago, cypress, burlington, longview, phenixCity, minnetonka, bartlett, shawnee, buenaPark, youngstown);
 for(let i = 0; i < cities.length; i++)
 {
@@ -26,4 +28,16 @@ for(let i = 0; i < cities.length; i++)
                 <p class="sun__text">${values[1]}</p>
             </li>`
         });
+}
+
+document.querySelectorAll(".city").forEach((cityHTMLElement) => {
+    cityHTMLElement.addEventListener("click", (e) => selectCity(cityHTMLElement.id));
+})
+
+function selectCity(id)
+{
+    //remove currently selected city
+    document.querySelector(".city--selected").classList.remove("city--selected");
+    //add city selected class to newly selected city
+    document.querySelector(`#${id}`).classList.add("city--selected");
 }

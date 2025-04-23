@@ -23,6 +23,7 @@ main {
     border-color: rgb(255, 192, 8, 0.75);
     border-style: solid;
     border-radius: 25px;
+    color: #FAF9F6;
 }
 
 .city__data {
@@ -42,6 +43,7 @@ main {
 }
 
 .city--selected {
+    grid-row-start: 1;
     grid-column-start: 1;
     grid-column-end: 5;
     margin-bottom: 2em;
