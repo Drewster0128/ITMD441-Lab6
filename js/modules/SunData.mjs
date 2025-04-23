@@ -32,10 +32,18 @@ export default class SunData
         this.#dusk = response.results["dusk"];
         
         this.#solorNoon = response.results["solar_noon"];
-        this.#sunrise = response.results["sunrise"];
-        this.#sunset = response.results["sunset"];
+        this.sunRise = response.results["sunrise"];
+        this.sunSet = response.results["sunset"];
 
         this.#timezone = response.results["timezone"];
+    }
+
+    #removeSeconds(time)
+    {
+        let [prefix, suffix] = time.split(" ");
+        let [hour, minute, _] = prefix.split(":");
+        time = [hour, minute].join(":");
+        return [time, suffix].join(" ");
     }
 
     get date()
@@ -104,6 +112,12 @@ export default class SunData
         })();
     }
 
+    set sunRise(sunRise)
+    {
+        //remove seconds as it is unncessary for most people
+        this.#sunrise = this.#removeSeconds(sunRise);
+    }
+
     get sunSet()
     {
         return (async() => {
@@ -113,6 +127,11 @@ export default class SunData
             }
             return this.#sunset;
         })();
+    }
+
+    set sunSet(sunSet)
+    {
+        this.#sunset = this.#removeSeconds(sunSet);
     }
 
     get timezone()
