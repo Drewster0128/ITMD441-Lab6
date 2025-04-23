@@ -26,6 +26,13 @@ main {
     color: #FAF9F6;
 }
 
+.city__coords {
+    display: none;
+    font-size: 1rem;
+    line-height: 1rem;
+    font-weight: normal;
+}
+
 .city__data {
     display: flex;
     flex-direction: row;
@@ -49,9 +56,29 @@ main {
     text-align: center;
 }
 
+.wrapper {
+    display: block;
+}
+
+.wrapper--subtitle {
+    padding: 0;
+    width: fit-content;
+    margin: auto;
+}
+
 .city--selected {
     grid-row-start: 1;
     grid-column-start: 1;
     grid-column-end: 5;
     margin-bottom: 2em;
+}
+
+.city--selected h3 {
+    display: inline-block;
+}
+
+.city--selected .city__coords::before {
+    content: "•";
+    margin-right: 0.25em;
+    display: inline-block;
 }

@@ -29,6 +29,7 @@ for(let i = 0; i < cities.length; i++)
             </li>`
 
             document.querySelector(`#${cities[i].id} .city__timezone`).textContent = values[2];
+            document.querySelector(`#${cities[i].id} .city__coords`).textContent = `(${cities[i].latitude}, ${cities[i].longitude})`
         });
 }
 
