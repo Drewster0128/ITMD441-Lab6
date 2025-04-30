@@ -15,8 +15,28 @@ header {
     margin-top: 1.5em;
 }
 
+a {
+    color: rgb(255, 192, 8, 0.75);
+}
+
+a:hover {
+    color: rgb(255, 192, 8);
+}
+
+footer {
+    font-size: 1.5em;
+    line-height: 1.2em;
+}
+
+footer p {
+    width: fit-content;
+    margin: auto;
+}
+
 h1 {
     text-align: center;
+    font-size: 3em;
+    line-height: 1.2em;
 }
 
 ul {
@@ -151,4 +171,8 @@ main {
 
 .city--selected .sun__dawn, .city--selected .sun__solarnoon, .city--selected .sun__dusk {
     display: list-item;
+}
+
+.subtitle {
+    text-align: center;
 }
